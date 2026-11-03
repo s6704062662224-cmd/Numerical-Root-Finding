@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numera | Numerical Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+    <div class="brand">Numera<span>.</span></div>
+    <div class="top-label">NUMERICAL METHODS LAB</div>
+</header>
+
+<main class="container">
+    <section class="intro">
+        <p class="eyebrow">MATH MADE SIMPLE</p>
+        <h1>Find your <span>root.</span></h1>
+        <p class="subtitle">เว็บคำนวณ Numerical Methods พร้อมแสดงผลลัพธ์และตาราง Iteration</p>
+    </section>
+
+    <section class="workspace">
+        <div class="panel">
+            <h2>Calculation Setup</h2>
+            <p class="muted">กำหนดสมการและค่าที่ต้องการคำนวณ</p>
+            <form id="calculatorForm">
+                <label for="method">Numerical Method</label>
+                <select id="method">
+                    <option value="bisection">Bisection Method</option>
+                    <option value="falseposition">False Position Method</option>
+                    <option value="newtonraphson">Newton-Raphson Method</option>
+                    <option value="secant">Secant Method</option>
+                </select>
+
+                <label for="function">Function f(x)</label>
+                <input id="function" value="x^3-x-2" required>
+                <p class="hint">ตัวอย่าง: x^3-x-2, sin(x), x^2-4, sqrt(x)</p>
+
+                <div id="intervalFields">
+                    <div class="two-columns">
+                        <div><label for="xl">XL (Lower)</label><input id="xl" type="number" step="any" value="1"></div>
+                        <div><label for="xu">XU (Upper)</label><input id="xu" type="number" step="any" value="2"></div>
+                    </div>
+                </div>
+
+                <div id="initialFields" class="hidden">
+                    <div class="two-columns">
+                        <div><label for="x0">X0 (Initial)</label><input id="x0" type="number" step="any" value="1"></div>
+                        <div id="x1Field" class="hidden"><label for="x1">X1 (Second)</label><input id="x1" type="number" step="any" value="2"></div>
+                    </div>
+                </div>
+
+                <div class="two-columns">
+                    <div><label for="tolerance">Tolerance</label><input id="tolerance" type="number" min="0.000000000001" step="any" value="0.000001" required></div>
+                    <div><label for="maxIterations">Max Iterations</label><input id="maxIterations" type="number" min="1" max="10000" value="100" required></div>
+                </div>
+                <button type="submit" id="calculateButton">Calculate Root <span>→</span></button>
+            </form>
+        </div>
+
+        <div class="panel">
+            <div class="result-heading">
+                <div><p class="eyebrow">CALCULATION RESULT</p><h2>Answer</h2></div>
+                <span class="status" id="status">READY</span>
+            </div>
+            <div id="emptyState" class="empty-state">
+                <div class="math-symbol">ƒ(x)</div>
+                <h3>Ready to calculate</h3>
+                <p>กรอกสมการทางซ้ายแล้วกด Calculate</p>
+            </div>
+            <div id="resultContent" class="hidden">
+                <p class="muted">Approximate Root</p>
+                <div id="rootValue" class="root-value">—</div>
+                <div class="stats">
+                    <div class="stat"><span>f(root)</span><strong id="fxValue">—</strong></div>
+                    <div class="stat"><span>Iterations</span><strong id="iterationCount">—</strong></div>
+                </div>
+                <p id="resultMessage" class="result-message"></p>
+            </div>
+            <div id="errorMessage" class="error hidden"></div>
+        </div>
+    </section>
+
+    <section id="tableSection" class="panel table-panel hidden">
+        <div class="table-heading">
+            <div><p class="eyebrow">STEP-BY-STEP</p><h2>Iteration Table</h2></div>
+            <button id="clearTable" class="secondary-button" type="button">Hide Table</button>
+        </div>
+        <div class="table-wrapper">
+            <table>
+                <thead><tr><th>Iteration</th><th>x</th><th>f(x)</th><th>Error</th></tr></thead>
+                <tbody id="iterationBody"></tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="panel history-panel">
+        <div class="table-heading">
+            <div><p class="eyebrow">SAVED IN DATABASE</p><h2>Calculation History</h2></div>
+            <button id="clearAllHistory" class="secondary-button" type="button">Clear All</button>
+        </div>
+        <div id="historyList" class="history-list"><p class="muted">กำลังโหลดประวัติ...</p></div>
+    </section>
+
+    <footer><p>NUMERA · Numerical Methods Calculator</p><p>Java · Spring Boot · OOP · H2 Database</p></footer>
+</main>
+<script src="script.js"></script>
+</body>
+</html>
